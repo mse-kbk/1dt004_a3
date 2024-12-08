@@ -5,7 +5,7 @@
 ! The utilization (U) for the whole system is calculated.
 ! -------------------------------------------------------
 
-system P12 {
+system P1_2 {
 
   declarations {
     tasks t1, t2, t3;

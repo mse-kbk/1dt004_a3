@@ -5,7 +5,7 @@
 ! The Demand Bound Function (DBF) for a task set T at a time length t is calculated.
 ! -------------------------------------------------------
 
-system P16 {
+system P1_6 {
 
   declarations {
     tasks t1, t2, t3;

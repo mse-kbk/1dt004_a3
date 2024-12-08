@@ -2,11 +2,10 @@
 ! One system with three tasks, (t1, t2, t3).
 ! Each task has a Period (T), a Worst Case Computation Time (C)
 ! a deadline (D) and a Period (P).
-! The response time (R) is calculated for each task as well
-! as the utilization (U) for the whole system.
+! The Worst Case Execution Time (W) is calculated for each task.
 ! -------------------------------------------------------
 
-system P45 {
+system P4_5 {
 
   declarations {
     tasks t1, t2;
@@ -37,10 +36,10 @@ system P45 {
   }
 
    formulas {
-    ! Calculate Worst Execution Time
+    ! Calculate Worst Case Execution Time
     W[i] = C[i] + sigma(hp, (1 + ceiling( (W[i] - (T[j] - J[j])) / T[j] ) * C[j]));
     
-    ! Calculate the response-time for each task
+    ! Calculate the Worst Case Response Time for each task
     R[i] = W[i] + J[i];
   }
 }

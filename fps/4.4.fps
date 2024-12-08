@@ -2,11 +2,10 @@
 ! One system with three tasks, (t1, t2, t3).
 ! Each task has a Period (T), a Worst Case Computation Time (C)
 ! a deadline (D) and a Period (P).
-! The response time (R) is calculated for each task as well
-! as the utilization (U) for the whole system.
+! The Worst Case Execution Time No-Jitter (W) is calculated for each task.
 ! -------------------------------------------------------
 
-system P44 {
+system P4_4 {
 
   declarations {
     tasks t1, t2;
@@ -37,7 +36,7 @@ system P44 {
   }
 
    formulas {
-    ! Calculate Worst Execution Time No-Jitter
+    ! Calculate Worst Case Execution Time No-Jitter
     W[i] = C[i] + sigma(hp, ceiling( W[i] / T[j] ) * C[j]);
   }
 }
