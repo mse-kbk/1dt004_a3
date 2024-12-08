@@ -1,0 +1,46 @@
+! -------------------------------------------------------
+! One system with three tasks, (t1, t2, t3).
+! Each task has a Period (T), a Worst Case Computation Time (C)
+! a deadline (D) and a Period (P).
+! The response time (R) is calculated for each task as well
+! as the utilization (U) for the whole system.
+! -------------------------------------------------------
+
+system Example {
+
+  declarations {
+    tasks t1, t2;
+    indexed C,T,D,J,R,W;
+    priority P;
+  }
+
+  initialise {
+    ! WCETs (worst case execution time)
+    C[t1] = 5;
+    C[t2] = 30;
+
+    ! Periods
+    T[t1] = 20;
+    T[t2] = 50;
+
+    ! Deadlines (not used)
+    D[t1] = 10;
+    D[t2] = 50;
+
+    ! Jitter - DM
+    J[t1] = 5;
+    J[t2] = 10;
+
+    ! Priorities
+    P[t1] = 1;
+    P[t2] = 2;
+  }
+
+   formulas {
+    ! Calculate Worst Execution Time
+    W[i] = C[i] + sigma(hp, (1 + ceiling( (W[i] - (T[j] - J[j])) / T[j] ) * C[j]));
+    
+    ! Calculate the response-time for each task
+    R[i] = W[i] + J[i];
+  }
+}
