@@ -36,7 +36,7 @@ system P17 {
   }
 
    formulas {
-	! Calculate the response-time for each task
+	  ! Calculate the response-time for each task
     R[i] = C[i] + sigma(hp, ceiling((R[i])/T[j]) * C[j]);
   }
 }

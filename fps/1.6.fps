@@ -11,7 +11,7 @@ system P16 {
     tasks t1, t2, t3;
     indexed T,C,D,DBF;
     priority P;
-	scalar TimeInterval;
+	  scalar TimeInterval;
   }
 
   initialise {
@@ -39,7 +39,8 @@ system P16 {
    formulas {
     ! Calculate the Demand Bound Function for all the tasks
     ! DBF must be indexed since lside and rside must be the same.
-	TimeInterval = 20.0;
+    ! TimeInterval used as a constant to denote the maximum time unit's value
+	  TimeInterval = 15.0;
     DBF[i] = sigma(all, floor((TimeInterval - D[j])/T[j] + 1) * C[j]);
   }
 }
