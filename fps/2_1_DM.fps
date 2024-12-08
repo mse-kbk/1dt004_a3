@@ -6,7 +6,7 @@
 ! as the utilization (U) for the whole system.
 ! -------------------------------------------------------
 
-system Example {
+system P21DM {
 
   declarations {
     tasks t1, t2, t3, t4;
