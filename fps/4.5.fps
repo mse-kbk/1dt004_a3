@@ -1,8 +1,9 @@
 ! -------------------------------------------------------
 ! One system with three tasks, (t1, t2, t3).
 ! Each task has a Period (T), a Worst Case Computation Time (C)
-! a deadline (D) and a Period (P).
-! The Worst Case Execution Time (W) is calculated for each task.
+! a deadline (D) and a Priority (P).
+! The Worst Case Execution Time (W) and 
+! Worst Case Response Time (R) is calculated for each task.
 ! -------------------------------------------------------
 
 system P4_5 {
@@ -35,7 +36,7 @@ system P4_5 {
     P[t2] = 2;
   }
 
-   formulas {
+  formulas {
     ! Calculate Worst Case Execution Time
     W[i] = C[i] + sigma(hp, (1 + ceiling( (W[i] - (T[j] - J[j])) / T[j] ) * C[j]));
     

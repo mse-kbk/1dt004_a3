@@ -1,7 +1,7 @@
 ! -------------------------------------------------------
 ! One system with three tasks, (t1, t2, t3).
 ! Each task has a Period (T), a Worst Case Computation Time (C)
-! a deadline (D), a Period (P) and a Blocking time (B).
+! a deadline (D), a Priority (P) and a Blocking time (B).
 ! The response time (R) is calculated for each task.
 ! -------------------------------------------------------
 
@@ -45,7 +45,7 @@ system P3_4 {
 	  B[t4] = 1;
   }
 
-   formulas {
+  formulas {
     ! Calculate the response-time for each task
     R[i] = C[i] + sigma(hp, ceiling((R[i])/T[j]) * C[j]) + B[i];
   }
