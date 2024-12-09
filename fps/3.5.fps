@@ -1,52 +1,44 @@
-! -------------------------------------------------------
-! One system with three tasks, (t1, t2, t3).
-! Each task has a Period (T), a Worst Case Computation Time (C)
-! a deadline (D), a Period (P) and a Blocking time (B).
-! The response time (R) is calculated for each task.
-! -------------------------------------------------------
-
-system P3_5 {
-
-  declarations {
-    tasks t1, t2, t3, t4;
-    indexed T,C,R,D,B;
-    priority P;
-  }
-
-  initialise {
-    ! Periods
-    T[t1] = 10;
-    T[t2] = 20;
-    T[t3] = 40;
-	  T[t4] = 100;
-
-    ! WCETs
-    C[t1] = 2;
-    C[t2] = 3;
-    C[t3] = 10;
-	  C[t4] = 4;
-
-    ! Deadlines 
-    D[t1] = 5;
-    D[t2] = 12;
-    D[t3] = 40;
-	  D[t4] = 50;
-
-    ! Priorities 
-    P[t1] = 1;
-    P[t2] = 2;
-    P[t3] = 3;
-	  P[t4] = 4;
-	
-    ! Blocking times - immediate inheritance protocol
-    B[t1] = 0;
-    B[t2] = 5;
-    B[t3] = 2;
-    B[t4] = 0;
-  }
-
-   formulas {
-    ! Calculate the response-time for each task
-    R[i] = C[i] + sigma(hp, ceiling((R[i])/T[j]) * C[j]) + B[i];
-  }
+system testing {
+  ! First and only system
+declarations {
+  ! Variable declarations
+  indexed Period, Deadline, CompTime, RespTime;
+  blocking Blockvar;
+  priority Priovar;
+  ! Task declarations
+  tasks t1, t2, t3, t4;
 }
+semaphores {
+	semaphore(S1, t2, 1);
+	semaphore(S1, t4, 2);
+	semaphore(S2, t2, 1);
+	semaphore(S2, t3, 5);
+}
+initialise {
+	Period[t1] = 10;
+	Period[t2] = 20;
+	Period[t3] = 40;
+	Period[t4] = 100;
+	
+	Deadline[t1] = 5;
+	Deadline[t2] = 12;
+	Deadline[t3] = 40;
+	Deadline[t4] = 50;
+	
+	Priovar[t1] = 1;
+	Priovar[t2] = 2;
+	Priovar[t3] = 3;
+	Priovar[t4] = 4;
+	
+	CompTime[t1] = 2;
+	CompTime[t2] = 3;
+	CompTime[t3] = 10;
+	CompTime[t4] = 4;
+}
+! Formula(s) to be iterated
+formulas {
+  RespTime[i] =
+  CompTime[i] + Blockvar[i] +
+  sigma(hp, ceiling(RespTime[i] / Period[j]) * CompTime[j]);
+}
+} ! End of definition file
