@@ -18,31 +18,31 @@ system P3_4 {
     T[t1] = 10;
     T[t2] = 20;
     T[t3] = 40;
-	  T[t4] = 100;
+	T[t4] = 100;
 
     ! WCETs
     C[t1] = 2;
     C[t2] = 3;
     C[t3] = 10;
-	  C[t4] = 4;
+	C[t4] = 4;
 
     ! Deadlines 
     D[t1] = 5;
     D[t2] = 12;
     D[t3] = 40;
-	  D[t4] = 50;
+	D[t4] = 50;
 
     ! Priorities 
     P[t1] = 1;
     P[t2] = 2;
     P[t3] = 3;
-	  P[t4] = 4;
+	P[t4] = 4;
 	
 	  ! Blocking times - priority inheritance protocol
 	  B[t1] = 0;
 	  B[t2] = 7;
-	  B[t3] = 1;
-	  B[t4] = 1;
+	  B[t3] = 0;
+	  B[t4] = 0;
   }
 
   formulas {
