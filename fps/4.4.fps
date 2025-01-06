@@ -1,42 +1,46 @@
 ! -------------------------------------------------------
-! One system with three tasks, (t1, t2, t3).
+! One system with two tasks, (tA, tB).
 ! Each task has a Period (T), a Worst Case Computation Time (C)
 ! a deadline (D) and a Priority (P).
-! The Worst Case Execution Time No-Jitter (W) is calculated for each task.
+! The Worst Case Execution Time (W) and 
+! Worst Case Response Time (R) with jitter is calculated for each task.
 ! -------------------------------------------------------
 
 system P4_4 {
 
   declarations {
-    tasks t1, t2;
-    indexed C,T,D,J,W;
+    tasks tA, tB;
+    indexed C,T,D,J,W,R;
     priority P;
   }
 
   initialise {
     ! WCETs (worst case execution time)
-    C[t1] = 5;
-    C[t2] = 30;
+    C[tA] = 5;
+    C[tB] = 30;
 
     ! Periods
-    T[t1] = 20;
-    T[t2] = 50;
+    T[tA] = 20;
+    T[tB] = 50;
 
     ! Deadlines (not used)
-    D[t1] = 10;
-    D[t2] = 50;
+    D[tA] = 10;
+    D[tB] = 50;
 
-    ! Jitter - DM
-    J[t1] = 5;
-    J[t2] = 10;
+    ! Jitter - not used for this computation
+    J[tA] = 0;
+    J[tB] = 0;
 
     ! Priorities
-    P[t1] = 1;
-    P[t2] = 2;
+    P[tA] = 1;
+    P[tB] = 2;
   }
 
   formulas {
     ! Calculate Worst Case Execution Time No-Jitter
-    W[i] = C[i] + sigma(hp, ceiling( W[i] / T[j] ) * C[j]);
+    W[i] = C[i] + sigma(hp, ceiling( (W[i] + J[j]) / T[j] ) * C[j]);
+	
+	! Calculate the Worst Case Response Time for each task
+    R[i] = W[i] + J[i];
   }
 }
